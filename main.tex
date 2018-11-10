@@ -1,0 +1,267 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{Illustration de quelques notions et notations utilisées dans la thèse}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{float} 
+\usepackage{pgfplots}
+\usepgfplotslibrary{fillbetween}
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks = true
+}
+
+\setlength{\parindent}{0em} 
+\setlength{\parskip}{.8em} 
+
+\newtheorem{definition}{Définition}
+\begin{document}
+\maketitle
+
+L'ensemble des mesures est divisé en deux catégories : 
+\begin{itemize}
+\item les mesures dans des fenêtres où l'état est stationnaire (SS) 
+\item les mesures dans des fenêtres où l'état est non stationnaire (NS).
+\end{itemize}
+La figure \ref{fig:examplemesure} montre l'exemple d'une variable d'état $x_i$ du système.
+Les valeurs variables d'état de système sont mesurés directement par des capteurs ou calculées par ces mesures.
+Des fenêtres SS (notées $T_i$) et NS se succèdent. Les longueurs de fenêtres sont différentes. Seules les mesures dans les fenêtres SS (i.e. $T_1$, $T_2$ et $T_3$) sont utilisées pour générer les indicateurs.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+      xlabel=t,
+      ylabel=$x_i$,
+      samples=100,
+    xmin=-1, xmax=12,
+    ymin=-1, ymax=3,
+    axis lines=middle,
+    ticks = none,
+    ]
+
+\addplot[only marks,domain=0:2,mark size=0.5pt]{2+0.2*rand};
+\node at (axis cs:1,-0.2) [] {$T_1$};
+
+\addplot [mark=none,blue,name path = l1] coordinates {(2, -1) (2, 3)};
+\addplot[mark=none,blue,name path = l2] coordinates {(3, -1) (3, 3)};
+\node at (axis cs:3.2,1) [anchor=north east] {NS};
+\addplot [blue,fill opacity=0.05] fill between[of=l1 and l2];
+
+\addplot[only marks,domain=3:6,mark size=0.5pt]{1.5+0.2*rand};
+\node at (axis cs:4.5,-0.2) [] {$T_2$};
+
+\addplot[mark=none,blue,name path = l3] coordinates {(6, -1) (6, 3)};
+\addplot[mark=none,blue,name path = l4] coordinates {(9, -1) (9, 3)};
+\node at (axis cs:7.5,1) [] {NS};
+\addplot [blue,fill opacity=0.05] fill between[of=l3 and l4];
+
+
+\addplot[only marks,domain=9:11,mark size=0.5pt]{2.5+0.2*rand};
+\node at (axis cs:10,-0.2) [] {$T_3$};
+
+\addplot[mark=none,blue] coordinates {(11, -1) (11, 3)};
+
+\end{axis}
+
+\end{tikzpicture}
+\caption{Évolution d'une mesure $x_i$}
+\label{fig:examplemesure}
+\end{figure}
+
+
+
+Chaque échantillon de mesures peut être utilisé pour calculer un échantillon d'indicateurs.
+L'évolution d'un indicateur $\rho_i$ est montré dans la figure \ref{fig:exampleindicator}.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+      xlabel=t,
+      ylabel=$\rho_i$,
+      samples=100,
+    xmin=-1, xmax=12,
+    ymin=-1, ymax=3,
+    axis lines=middle,
+    xtick={1,4.5,10},
+    ytick={\empty},
+    xticklabels={\empty},
+    ]
+
+\addplot[only marks,domain=0:2,mark size=0.5pt]{2+0.2*rand};
+\node at (axis cs:1,-0.2) [] {$T_1$};
+
+\addplot [mark=none,blue,name path = l1] coordinates {(2, -1) (2, 3)};
+\addplot[mark=none,blue,name path = l2] coordinates {(3, -1) (3, 3)};
+
+
+\addplot[only marks,domain=3:6,mark size=0.5pt]{2+0.2*rand};
+\node at (axis cs:4.5,-0.2) [] {$T_2$};
+
+\addplot[mark=none,blue,name path = l3] coordinates {(6, -1) (6, 3)};
+\addplot[mark=none,blue,name path = l4] coordinates {(9, -1) (9, 3)};
+
+
+
+\addplot[only marks,domain=9:11,mark size=0.5pt]{2.2+0.2*rand};
+\node at (axis cs:10,-0.2) [] {$T_3$};
+
+\addplot[mark=none,blue] coordinates {(11, -1) (11, 3)};
+
+\end{axis}
+
+\end{tikzpicture}
+\caption{Évolution d'un indicateur $\rho_i$}
+\label{fig:exampleindicator}
+\end{figure}
+
+Comme les mesures dans chaque fenêtre SS ont la même espérance, les indicateurs calculés par ces mesures ont aussi la même espérance.
+L'espérance de la moyenne des valeurs des indicateurs d'une fenêtre SS est identique à l'espérance des échantillons des indicateurs de cette fenêtre. 
+En faisant l'hypothèse que les échantillons d'indicateurs sur une fenêtre temporelle $T_i$  sont issus d'une distribution gaussienne, la moyenne des valeurs de ces échantillons est aussi issue d'une distribution gaussienne avec une variance plus faible.
+ 
+Dans la suite, les moyennes des indicateurs sont utilisées pour suivre l'état de santé des équipements. 
+Notons $r_i$ la moyenne des valeurs de $\rho_i$ sur une fenêtre SS.
+$r_i$ peut aussi décomposé en deux parties : 
+\begin{equation}
+    r_i  = \mu_i + \epsilon_i
+\end{equation}
+$\epsilon_i$ suit uen distribution gaussienne d'une espérance nulle.
+
+La valeur de $r_i$ calculée en utilisant les valeurs des échantillons de $\rho_i$ dans la fenêtre $T_j$ est notée $r_i(t_j)$, où $t_j$ est l'instant au milieu de la fenêtre temporelle $T_j$.
+Les moyennes des indicateurs de la figure \ref{fig:exampleindicator} sont indiqués dans la figure \ref{fig:exampleindicateurmoyen}. Les points représentent (de gauche à droite) $r_i(t_1)$, $r_i(t_2)$, $r_i(t_3)$
+
+
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+      xlabel=t,
+      ylabel=$r_i$,
+      samples=100,
+    xmin=-1, xmax=12,
+    ymin=-1, ymax=3,
+    axis lines=middle,
+    xtick={1,4.5,10},
+    xticklabels={$t_1$,$t_2$,$t_3$},
+    ytick={\empty},
+    ]
+
+\addplot[only marks,mark size=2pt] coordinates {(1, 2)};
+
+
+\addplot [mark=none,blue,name path = l1] coordinates {(2, -1) (2, 3)};
+\addplot[mark=none,blue,name path = l2] coordinates {(3, -1) (3, 3)};
+
+
+\addplot[only marks,mark size=2pt] coordinates {(4.5, 2)};
+
+
+\addplot[mark=none,blue,name path = l3] coordinates {(6, -1) (6, 3)};
+\addplot[mark=none,blue,name path = l4] coordinates {(9, -1) (9, 3)};
+
+
+
+\addplot[only marks,mark size=2pt] coordinates {(10, 2.5)};
+
+
+\addplot[mark=none,blue] coordinates {(11, -1) (11, 3)};
+
+\end{axis}
+
+\end{tikzpicture}
+\caption{Évolutions des valeurs moyennes des indicateurs}
+\label{fig:exampleindicateurmoyen}
+\end{figure}
+Ajouter
+
+\begin{itemize}
+    \item Il faut faire une figure qui ressemble à la figure 3, mais avec plus d'échantillons
+    \item présenter les valeurs discrètes dans l'espace des indicateurs
+    \item Expliquer d'abord le changement avec la courbe continue
+    \item Dire les contraintes pour distinguer automatiquement les évolutions causées par des dégradations et des défauts
+\end{itemize}
+
+Comme les indicateurs peuvent être influencés par les mêmes défauts, leurs évolutions peuvent être corrélées. 
+Afin d'exploiter ces corrélations nous analysons les indicateurs dans l'espace des indicateurs.
+Les informations temporelles sont conservées sous la forme d'une \textit{étiquette} attachée à chaque échantillon d'indicateur.
+
+Ajouter
+
+
+
+\begin{definition}
+Nous appelons \textbf{trajectoire} l'évolution de la composante déterministe des valeurs d'indicateurs dans l'espace des indicateurs.
+\end{definition}
+
+Considérons deux indicateurs $r_i$ et $r_j$. 
+Deux trajectoires sont représentées dans l'espace $\mu_i$ et $\mu_j$  (Figure \ref{fig:trajectoiremu}).
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+      xlabel=$\mu_i$,
+      ylabel=$\mu_j$,
+      samples=100,
+    xmin=-1, xmax=12,
+    ymin=-1, ymax=3,
+    axis lines=middle,
+    ticks = none
+    ]
+    
+    \addplot[domain = 1:5, samples=100] {x-0.5};
+    \draw
+    (axis cs:3, 2.5) coordinate (tmp) % start point
+      ++(-30:5mm)
+      node[
+        below right,
+        align=left,
+      ] (test) {Trajectoire 1}
+      (test.north) -- (tmp);
+
+    \addplot[domain = 6:10, samples=100] {-(x-6)+4.5};
+    \draw
+    (axis cs:9, 1.5) coordinate (tmp) % start point
+      ++(-30:5mm)
+      node[
+        below left,
+        align=left,
+      ] (test) {Trajectoire 2}
+      (test.north) -- (tmp);
+\end{axis}
+
+\end{tikzpicture}
+\caption{Exemple de trajectoires de deux indicateurs}
+\label{fig:trajectoiremu}
+\end{figure}
+
+Les valeurs des indicateurs calculées sont bruitées. 
+En faisant l'hypothèse que la composante aléatoire des indicateurs suit une distribution gaussienne d'espérance nulle, les valeurs des indicateurs sont dispersées autour des trajectoires comme illustré à la figure \ref{fig:exampletrajectoirer}. 
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+      xlabel=$r_i$,
+      ylabel=$r_j$,
+      samples=100,
+    xmin=-1, xmax=12,
+    ymin=-1, ymax=3,
+    axis lines=middle,
+    ticks = none
+    ]
+    
+    \addplot[domain = 1:5, samples=100,only marks,mark size=0.5pt] {x-0.5+ 0.2*rand};
+    \addplot[domain = 6:10, samples=100,only marks,mark size=0.5pt] {-(x-6)+4.5+0.2*rand};
+\end{axis}
+
+\end{tikzpicture}
+\caption{Exemple d'évolution des deux indicateurs}
+\label{fig:exampletrajectoirer}
+\end{figure}
+
+
+\end{document}
