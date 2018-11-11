@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.3)  11 NOV 2018 17:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.3)  11 NOV 2018 18:42
 entering extended mode
 **./main.tex
 (main.tex
@@ -1218,31 +1218,25 @@ Missing character: There is no 1 in font nullfont!
 Missing character: There is no p in font nullfont!
 Missing character: There is no t in font nullfont!
 PGFPlots: reading {traj3R.txt}
-[5]
-Overfull \hbox (2.86166pt too wide) in paragraph at lines 343--344
-[]\OT1/cmr/m/n/10 Dire les con-traintes pour dis-tinguer au-toma-tique-ment les
- evolutions causees
- []
-
-[6]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 351.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 351.
+[5] [6]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 353.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 353.
  (main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 351.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 351.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 353.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 353.
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 351.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 353.
  ) 
 Here is how much of TeX's memory you used:
- 26301 strings out of 493324
- 656134 string characters out of 3139077
- 1029312 words of memory out of 3000000
- 29387 multiletter control sequences out of 15000+200000
+ 26299 strings out of 493324
+ 656082 string characters out of 3139077
+ 1562968 words of memory out of 3000000
+ 29385 multiletter control sequences out of 15000+200000
  8307 words of font info for 29 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  69i,11n,107p,735b,1973s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1255,7 +1249,7 @@ e1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
 /amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts
 /cm/cmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10
 .pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on main.pdf (6 pages, 227100 bytes).
+Output written on main.pdf (6 pages, 401807 bytes).
 PDF statistics:
  91 PDF objects out of 1000 (max. 8388607)
  16 named destinations out of 1000 (max. 500000)

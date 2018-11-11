@@ -202,7 +202,7 @@ A ces instants, on suppose qu'il y a des défauts brusques surviennent.
 	xlabel=$t$,
 	ylabel=$r_i$,
 	samples=100,
-	xmin=-1, xmax=300,
+	xmin=-1, xmax=1100,
 	ymin=-0.2, ymax=1,
 	axis lines=middle,
 	xtick={50,120,140,200},
@@ -211,8 +211,8 @@ A ces instants, on suppose qu'il y a des défauts brusques surviennent.
 	]
 	
 	
-	\addplot[only marks] table {r1.txt};
-	\addplot[smooth,red,line width=3pt] table {mu1.txt};
+	\addplot[only marks,mark size = 1pt] table {r1.txt};
+	\addplot[smooth,red,line width=2pt] table {mu1.txt};
 	
 	
 %	\addplot[mark=none,blue,name path = l3] coordinates {(50, \pgfkeysvalueof{/pgfplots/ymin}) (50, \pgfkeysvalueof{/pgfplots/ymax})};
@@ -241,7 +241,7 @@ A titre d'exemple, l'évolution d'un deuxième indicateur est simulée.
 	xlabel=$t$,
 	ylabel=$r_j$,
 	samples=100,
-	xmin=-1, xmax=300,
+	xmin=-1, xmax=1100,
 	ymin=-0.2, ymax=1,
 	axis lines=middle,
 	xtick={50,120,140,200},
@@ -249,8 +249,8 @@ A titre d'exemple, l'évolution d'un deuxième indicateur est simulée.
 	ytick={\empty},
 	]
 	
-		\addplot[only marks] table {r2.txt};
-	\addplot[smooth,red,line width=3pt] table {mu2.txt};
+		\addplot[only marks,mark size = 1pt ] table {r2.txt};
+	\addplot[smooth,red,line width=2pt] table {mu2.txt};
 	
 	\end{axis}
 	
@@ -313,6 +313,13 @@ Cependant, comme cela a été présenté ci-dessous, ce sont les valeurs d'indic
 Les échantillons d'indicateurs sont discrètes et l'intervalle des échantillons n'est pas une constante. 
 
 Les valeurs de ces indicateurs sont présentées dans la figure \ref{fig:exampletrajectoirer}.
+Aux instants des occurrences des défauts brusques $t_{c2}$ et $t_{c3}$, l'évolution de la composante déterministe est discontinue. 
+Cependant, les valeurs d'indicateurs sont discrètes. 
+La discontinuité est définie pour des signaux continus.
+Il est impossible de tester la discontinuité en utilisant des échantillons qui sont discrets.
+La connaissance sur la discontinuité de l'évolution ne peut donc pas être exploitée, il est impossible de séparer les évolutions causées par des défauts brusques et des dégradations en se basant sur la discontinuité.
+Les causes réelles des changements des valeurs des indicateurs nécessite des vérifications des équipements par des opérateurs.
+
 
 \begin{figure}[H]
 	\centering
@@ -338,13 +345,8 @@ ticks = none
 	\label{fig:exampletrajectoirer}
 \end{figure}
 
-\begin{itemize}
-    \item présenter les valeurs discrètes dans l'espace des indicateurs
-    \item Dire les contraintes pour distinguer automatiquement les évolutions causées par des dégradations et des défauts
-\end{itemize}
 
 
- 
 
 
 
